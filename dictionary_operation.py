@@ -70,6 +70,104 @@ student = {
 
 # Display the final formatted student record with all the updated information, including the average score and academic status.
 # It should look like the following: 
+for key, value in student.items():
+    print(f"{key}: {value}")
+print("-" * 30)
+
+if 'email' not in student:
+    email = input("Enter email: ")
+    student['email'] = email
+
+new_city = input("Enter new city: ")
+while not new_city:
+    new_city = input("City cannot be empty. Enter new city: ")
+student['city'] = new_city
+
+if student.get('phone') is None:
+    phone = input("Enter phone: ")
+    if phone:
+        student['phone'] = phone
+    else:
+        print("Phone number not found.")
+
+student['contact'] = {
+    'phone': student.get('phone', 'Phone number not found.'),
+    'email': student.get('email', '')
+}
+
+student['courses'] = {
+    'Python': 88,
+    'Databases': 91,
+    'Software Engineering': 84
+}
+
+total_score = 0
+course_count = 0
+for score in student['courses'].values():
+    total_score += score
+    course_count += 1
+average_score = total_score / course_count
+
+if average_score >= 90:
+    status = "Excellent"
+elif average_score >= 75:
+    status = "Good"
+elif average_score >= 60:
+    status = "Pass"
+else:
+    status = "At Risk"
+student['academic_status'] = status
+
+search_course = input("Enter course name to search: ")
+if search_course in student['courses']:
+    print(f"{search_course}: {student['courses'][search_course]}")
+else:
+    print("Course not found")
+
+update_course = input("Enter course name to update: ")
+if update_course in student['courses']:
+    new_score = float(input("Enter new score: "))
+    if 0 <= new_score <= 100:
+        student['courses'][update_course] = new_score
+        print(f"Score for {update_course} updated to {new_score}")
+    else:
+        print("Score must be between 0 and 100.")
+else:
+    print("Course not found")
+
+total_score = 0
+course_count = 0
+for score in student['courses'].values():
+    total_score += score
+    course_count += 1
+average_score = total_score / course_count
+
+if average_score >= 90:
+    status = "Excellent"
+elif average_score >= 75:
+    status = "Good"
+elif average_score >= 60:
+    status = "Pass"
+else:
+    status = "At Risk"
+student['academic_status'] = status
+
+print("STUDENT RECORD")
+print("=" * 37)
+print(f"Name: {student['name']}")
+print(f"Student ID: {student['student_id']}")
+print(f"Age: {student['age']}")
+print(f"Program: {student['program']}")
+print(f"City: {student['city']}")
+print(f"GPA: {student['gpa']}")
+print("CONTACT")
+print(f"Phone: {student['contact']['phone']}")
+print(f"Email: {student['contact']['email']}")
+print("COURSE RESULTS")
+for course, score in student['courses'].items():
+    print(f"{course}: {score}")
+print(f"Average Score: {average_score:.1f}")
+print(f"Academic Status: {student['academic_status']}")
 """ 
 =====================================
         STUDENT RECORD
